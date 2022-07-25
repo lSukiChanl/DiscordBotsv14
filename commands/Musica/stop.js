@@ -1,10 +1,10 @@
+const { Constants } = require('discord.js')
 const { DisTube } = require('distube')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 
-
 module.exports = {
-    name: "join",
-    aliases: ["unirse"],
+    name: "stop",
+    aliases: ["salir"],
     description:"Escribir con Menhera-Chan",
     async execute (client, message, args, discord){
 
@@ -13,17 +13,20 @@ module.exports = {
             emitNewSongOnly: true,
             emitAddSongWhenCreatingQueue: false,
             emitAddListWhenCreatingQueue: false,
-            plugins: [new YtDlpPlugin()]
+            plugins: [
+              new YtDlpPlugin()
+            ]
         })
+
           
         try {
-
-            const Argumentos = args.join(' ')
-            const Voice = message.member.voice.channel;
-            console.log(Voice);
-            if (!Voice) return message.reply('Tienes que entrar a un Canal de Voz');
-            client.distube.voices.join(Voice)
+           
+            const queue = client.distube.getQueue(message)
+            if (!queue) return message.channel.send(`${client.emotes.error} | There is nothing in the queue right now!`)
+            queue.stop()
+            message.channel.send(`${client.emotes.success} | Stopped!`)
             
+            client.distube.voices.join(voiceChannel)
         } catch (error) {
             return console.log("Error : " + error);
         }

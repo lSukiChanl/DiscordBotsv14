@@ -3,8 +3,8 @@ const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 
 module.exports = {
-    name: "join",
-    aliases: ["unirse"],
+    name: "leave",
+    aliases: ["abandonar"],
     description:"Escribir con Menhera-Chan",
     async execute (client, message, args, discord){
 
@@ -22,7 +22,7 @@ module.exports = {
             const Voice = message.member.voice.channel;
             console.log(Voice);
             if (!Voice) return message.reply('Tienes que entrar a un Canal de Voz');
-            client.distube.voices.join(Voice)
+            client.distube.voices.leave(message)
             
         } catch (error) {
             return console.log("Error : " + error);
