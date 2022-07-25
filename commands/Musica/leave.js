@@ -1,21 +1,9 @@
-const { DisTube } = require('distube')
-const { YtDlpPlugin } = require('@distube/yt-dlp')
-
-
 module.exports = {
     name: "leave",
-    aliases: ["abandonar"],
-    description:"Escribir con Menhera-Chan",
+    aliases: ["abandonar", "l"],
+    description:"Abandonar el Canal de Voz",
     async execute (client, message, args, discord){
 
-        client.distube = new DisTube(client, {
-            leaveOnStop: false,
-            emitNewSongOnly: true,
-            emitAddSongWhenCreatingQueue: false,
-            emitAddListWhenCreatingQueue: false,
-            plugins: [new YtDlpPlugin()]
-        })
-          
         try {
 
             const Argumentos = args.join(' ')

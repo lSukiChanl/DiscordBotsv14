@@ -1,19 +1,22 @@
 module.exports = {
-    name: "pause",
-    aliases: ["parar"],
+    name: "seek",
+    aliases: ["seek"],
     description:"Pausar la Cancion Actual",
     async execute (client, message, args, discord){
         try {
+
             const queue = client.distube.getQueue(message)
             if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
-            if (queue.paused) {
-              queue.resume()
-              return message.channel.send('Resumed the song for you :)')
+            if (!args[0]) {
+            return message.channel.send(`$Please provide position (in seconds) to seek!`)
             }
-            queue.pause()
-            message.channel.send('Paused the song for you :)')
+            const time = Number(args[0])
+            if (isNaN(time)) return message.channel.send(`Please enter a valid number!`)
+            queue.seek(time)
+            message.channel.send(`Seeked to ${time}!`)
         } catch (error) {
             return console.log("Error : " + error);
         }
     }
 };
+

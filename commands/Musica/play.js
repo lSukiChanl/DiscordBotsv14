@@ -1,9 +1,11 @@
 const yrS = require("yt-search");
 const { EmbedBuilder } = require('discord.js');
+const { DisTube } = require('distube')
+const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 module.exports = {
     name: "play",
-    aliases: ["reproducir"],
+    aliases: ["reproducir", "p"],
     description:"Escribir con Menhera-Chan",
     async execute (client, message, args, discord){
 
@@ -16,6 +18,20 @@ module.exports = {
                 }})
                 )
             );
+
+            client.distube = new DisTube(client, {
+                searchSongs: 1,
+                leaveOnEmpty: true,
+                leaveOnFinish: true,
+                leaveOnStop: true,
+                searchCooldown: 45,
+                emitNewSongOnly: true,
+                emitAddSongWhenCreatingQueue: false,
+                emitAddListWhenCreatingQueue: false,
+              plugins: [
+                new YtDlpPlugin()
+              ]
+            })
 
             const Argumentos = args.join(' ')
             const Voice = message.member.voice.channel;
@@ -43,24 +59,39 @@ module.exports = {
             const WEB = process.env.PAGINAWEB;
             const Vote = process.env.VOTE;
 
-            let embed = new EmbedBuilder()
-                .setColor('#D57DC1')
-                .setTitle('Pagina Oficial')
-	            .setURL(WEB)
-                .setAuthor({ name: Author +' | 𝐂𝐥𝐢𝐜𝐤 𝐩𝐚𝐫𝐚 𝐕𝐨𝐭𝐚𝐫', iconURL: Icon, url: Vote })
-                //.setThumbnail(Icon)
-                .addFields({ name: "🎧 𝐀𝐠𝐫𝐞𝐠𝐚𝐝𝐨 𝐚 𝐥𝐚 𝐂𝐨𝐥𝐚 🎧", value: Result.title + '\n' + Result.description + '\n' + Result.url, inline: false })
-                .setImage(Result.image)
-                .setFooter({text: " 𝐂𝐫𝐞𝐝𝐢𝐭𝐨𝐬 : "+ Creditos +"  "+ Version +" "})
-                .setTimestamp()
-            message.channel.send({ embeds: [embed]});
-         
+            const queue = client.distube.getQueue(message);
+            if (!queue){
+                let embed = new EmbedBuilder()
+                    .setColor('#D57DC1')
+                    .setTitle('Pagina Oficial')
+                    .setURL(WEB)
+                    .setAuthor({ name: Author +' | 𝐂𝐥𝐢𝐜𝐤 𝐩𝐚𝐫𝐚 𝐕𝐨𝐭𝐚𝐫', iconURL: Icon, url: Vote })
+                    //.setThumbnail(Icon)
+                    .addFields({ name: "🎧 Reproduciendo 🎧", value: Result.title + '\n' + Result.description + '\n' + Result.url, inline: false })
+                    .setImage(Result.image)
+                    .setFooter({text: " 𝐂𝐫𝐞𝐝𝐢𝐭𝐨𝐬 : "+ Creditos +"  "+ Version +" "})
+                    .setTimestamp()
+                message.channel.send({ embeds: [embed]});
+            }else{
+                let embed = new EmbedBuilder()
+                    .setColor('#D57DC1')
+                    .setTitle('Pagina Oficial')
+                    .setURL(WEB)
+                    .setAuthor({ name: Author +' | 𝐂𝐥𝐢𝐜𝐤 𝐩𝐚𝐫𝐚 𝐕𝐨𝐭𝐚𝐫', iconURL: Icon, url: Vote })
+                    //.setThumbnail(Icon)
+                    .addFields({ name: "🎧 Agregando a la Cola 🎧", value: Result.title + '\n' + Result.description + '\n' + Result.url, inline: false })
+                    .setImage(Result.image)
+                    .setFooter({text: " 𝐂𝐫𝐞𝐝𝐢𝐭𝐨𝐬 : "+ Creditos +"  "+ Version +" "})
+                    .setTimestamp()
+                message.channel.send({ embeds: [embed]});
+            }
+
             client.distube.play(message.member.voice.channel, Argumentos, {
                 member: message.member,
                 textChannel: message.channel,
                 message
             })
-            
+
         } catch (error) {
             return console.log("Error : " + error);
         }

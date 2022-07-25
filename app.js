@@ -1,16 +1,8 @@
 require("dotenv").config();
-const { Constants } = require('discord.js')
 const { DisTube } = require('distube')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 const discord = require("discord.js");
-
-const Creditos = process.env.AUTHOR;
-const Version = process.env.VERSION;
-const Author = process.env.NOMBREAUTOR;
-const Icon = process.env.ICONURL;
-const WEB = process.env.PAGINAWEB;
-const Vote = process.env.VOTE;
 
 const client = new discord.Client({
   'intents': [
@@ -32,21 +24,21 @@ const client = new discord.Client({
     require(`./handlers/${file}`)(client, discord);
 });
 
-
-
 //DISTUBE
 client.distube = new DisTube(client, {
-  searchCooldown: 30,
-  leaveOnEmpty: true,
-  leaveOnFinish: true,
-  leaveOnStop: true,
-  emitNewSongOnly: true,
-  emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
+	searchSongs: 10,
+	leaveOnEmpty: true,
+	leaveOnFinish: true,
+	leaveOnStop: true,
+	searchCooldown: 45,
+	emitNewSongOnly: true,
+	emitAddSongWhenCreatingQueue: false,
+	emitAddListWhenCreatingQueue: false,
   plugins: [
     new YtDlpPlugin()
   ]
 })
+
 
 // Queue status template
 const status = queue =>
@@ -63,47 +55,37 @@ const status = queue =>
 // DisTube event listeners, more in the documentation page
 client.distube
 	.on('playSong', (queue, song) =>
-		queue.textChannel?.send(
-			`Playing \`${song.name}\` - \`${
-				song.formattedDuration
-			}\`\nRequested by: ${song.user}\n${status(queue)}`,
-		),
+		console.log('Reproduciendo Cancion => ' + song.name)
 	)
 	.on('addSong', (queue, song) =>
-		queue.textChannel?.send(
-			`Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`,
-		),
+		console.log('Agregando Cancion => ' + song.name)
 	)
 	.on('addList', (queue, playlist) =>
-		queue.textChannel?.send(
-			`Added \`${playlist.name}\` playlist (${
-				playlist.songs.length
-			} songs) to queue\n${status(queue)}`,
-		),
+		console.log('Reproduciendo Playlists')
 	)
 	.on('error', (textChannel, e) => {
 		console.error(e);
 		textChannel.send(
-			`An error encountered: ${e.message.slice(0, 2000)}`,
+			`Mensaje de Error => ${e.message.slice(0, 2000)}`,
 		);
 	})
-	.on('finish', queue => queue.textChannel?.send('Finish queue!'))
+	.on('finish', queue => queue.textChannel?.send('Lista Terminada!'))
 	.on('finishSong', queue =>
-		queue.textChannel?.send('Finish song!'),
+		queue.textChannel?.send('Cancion Terminada!'),
 	)
 	.on('disconnect', queue =>
-		queue.textChannel?.send('Disconnected!'),
+		queue.textChannel?.send('Desconectando!'),
 	)
 	.on('empty', queue =>
 		queue.textChannel?.send(
-			'The voice channel is empty! Leaving the voice channel...',
+			'El Canal de Voz esta Vacio! Abandonando Canal de Voz...',
 		),
 	)
 	// DisTubeOptions.searchSongs > 1
 	.on('searchResult', (message, result) => {
 		let i = 0;
 		message.channel.send(
-			`**Choose an option from below**\n${result
+			`**Elige una Opcion\nEscribiendo el Numero Indicado**\n${result
 				.map(
 					song =>
 						`**${++i}**. ${song.name} - \`${
@@ -112,17 +94,17 @@ client.distube
 				)
 				.join(
 					'\n',
-				)}\n*Enter anything else or wait 30 seconds to cancel*`,
+				)}\n \n*Escribe un Espacio en Blanco o Espera 45 Segundos para cancelar*`,
 		);
 	})
 	.on('searchCancel', message =>
-		message.channel.send('Searching canceled'),
+		message.channel.send('Busqueda Cancelada'),
 	)
 	.on('searchInvalidAnswer', message =>
-		message.channel.send('Invalid number of result.'),
+		message.channel.send('Numero Indicado Incorrecto'),
 	)
 	.on('searchNoResult', message =>
-		message.channel.send('No result found!'),
+		message.channel.send('No se Encontraron Resultados!'),
 	)
 	.on('searchDone', () => {});
 
