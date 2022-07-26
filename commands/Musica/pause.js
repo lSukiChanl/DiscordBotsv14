@@ -1,6 +1,6 @@
 module.exports = {
     name: "pause",
-    aliases: ["parar"],
+    aliases: ["parar", "resume", "seguir"],
     description:"Pausar la Cancion Actual",
     async execute (client, message, args, discord){
         try {

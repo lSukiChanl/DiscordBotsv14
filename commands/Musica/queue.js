@@ -7,13 +7,13 @@ module.exports = {
 
          const queue = client.distube.getQueue(message);
 		if (!queue) {
-			message.channel.send('Nothing playing right now!');
+			return message.channel.send('**No se Esta Reproduciendo Nada Ahora Mismo!**');
 		} else {
 			message.channel.send(
-				`Current queue:\n${queue.songs
+				`**Lista de Reproduccion :**\n${queue.songs
 					.map(
 						(song, id) =>
-							`**${id ? id : 'Playing'}**. ${
+							`**${id ? id : 'Reproduciendo Ahora Mismo'}**. ${
 								song.name
 							} - \`${song.formattedDuration}\``,
 					)

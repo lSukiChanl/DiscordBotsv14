@@ -1,18 +1,21 @@
 module.exports = {
     name: "repeat",
-    aliases: ["bucle"],
+    aliases: ["bucle", "shuffle"],
     description:"Escribir con Menhera-Chan",
     async execute (client, message, args, discord){
 
         try {
+            const queue = client.distube.getQueue(message)
+            if (!queue) return message.channel.send('**No se Esta Reproduciendo Nada Ahora Mismo!**');
+            
             const mode = client.distube.setRepeatMode(message);
             message.channel.send(
-                `Set repeat mode to \`${
+                `Modo Bucle :  \`${
                     mode
                         ? mode === 2
-                            ? 'All Queue'
-                            : 'This Song'
-                        : 'Off'
+                            ? 'Todas las Canciones'
+                            : 'Esta Cancion'
+                        : 'Desactivado'
                 }\``,
             );
 

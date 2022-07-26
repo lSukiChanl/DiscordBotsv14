@@ -5,7 +5,6 @@ module.exports = {
     async execute (client, message, args, discord){
         try {
             const Voice = message.member.voice.channel;
-            console.log(Voice);
             if (!Voice) return message.reply('Tienes que entrar a un Canal de Voz');
             client.distube.voices.join(Voice)
         } catch (error) {
