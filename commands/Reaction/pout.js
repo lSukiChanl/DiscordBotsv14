@@ -13,7 +13,7 @@ module.exports = {
             const Url = process.env.URL;
             
             let NumMagic = Math.floor(Math.random()*63);
-            NumMagic = NumMagic + 1;            
+            NumMagic = NumMagic + 1;
             let embed = new discord.EmbedBuilder()
                 .setColor('#D57DC1')
                 .setAuthor({ name: Author + ' | 𝐂𝐥𝐢𝐜𝐤 𝐩𝐚𝐫𝐚 𝐕𝐨𝐭𝐚𝐫', iconURL: Icon, url: Url })

@@ -1,7 +1,5 @@
 module.exports = (client, discord, interaction) =>{
 
-    console.log(interaction.type === 2);
-
     if (interaction.type === 2){
         const command = client.slash.get(interaction.commandName);
         try{

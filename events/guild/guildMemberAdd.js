@@ -1,3 +1,3 @@
 module.exports = (client, discord, member) => {
-    console.log(member.user);
+    //console.log(member.user);
 };

@@ -8,70 +8,22 @@ module.exports = {
         type: "3",
         required: "true",
         choices: [
-            {
-                name: "Angry - Enojada",
-                value: "Angry"
-            },
-            {
-                name: "Blush - Sonrojada",
-                value: "Blush"
-            },
-            {
-                name: "Bow - Agradecida",
-                value: "Bow"
-            },
-            {
-                name: "Bye - Adios",
-                value: "Bye"
-            },
-            {
-                name: "Chesse - Posando",
-                value: "Chesse"
-            },
-            {
-                name: "Cry - Llorando",
-                value: "Cry"
-            },
-            {
-                name: "Depress - Deprimida",
-                value: "Depress"
-            },
-            {
-                name: "Die - Muerta",
-                value: "Die"
-            },
-            {
-                name: "Excited - Emocionada",
-                value: "Excited"
-            },
-            {
-                name: "Furious - Enfadada",
-                value: "Furious"
-            },
-            {
-                name: "Glad - Alegre",
-                value: "Glad"
-            },
-            {
-                name: "Grin - Muecas",
-                value: "Grin"
-            },
-            {
-                name: "Laught - Riendo - Haha",
-                value: "Haha"
-            },
-            {
-                name: "Happy - Feliz",
-                value: "Happy"
-            },
-            {
-                name: "Hee - Que?",
-                value: "Hee"
-            },
-            {
-                name: "Hi - Hola",
-                value: "Hi"
-            },
+            {name: "Angry - Enojada", value: "Angry"},
+            {name: "Blush - Sonrojada", value: "Blush"},
+            {name: "Bow - Agradecida", value: "Bow"},
+            {name: "Bye - Adios", value: "Bye"},
+            {name: "Chesse - Posando", value: "Chesse"},
+            {name: "Cry - Llorando", value: "Cry"},
+            {name: "Depress - Deprimida", value: "Depress"},
+            {name: "Die - Muerta", value: "Die"},
+            {name: "Excited - Emocionada", value: "Excited"},
+            {name: "Furious - Enfadada", value: "Furious"},
+            {name: "Glad - Alegre", value: "Glad"},
+            {name: "Grin - Muecas", value: "Grin"},
+            {name: "Laught - Riendo - Haha", value: "Haha"},
+            {name: "Happy - Feliz", value: "Happy"},
+            {name: "Hee - Que?", value: "Hee"},
+            {name: "Hi - Hola", value: "Hi"},
         ]
       },
     ],
@@ -158,7 +110,7 @@ module.exports = {
         
         
       } catch (error) {
-        interaction.reply({ content: "Faltan datosx" });
+        interaction.reply({ content: "Faltan Datos" });
         console.log(error);
       }
     },
