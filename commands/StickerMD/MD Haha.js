@@ -1,6 +1,6 @@
 module.exports = {
     name: "mdhaha",
-    aliases: ["mdjaja"],
+    aliases: ["mdjaja", "mdriendo", "melaught"],
     description:"Sticker Menhera Perrita Riendo",
     async execute (client, message, args, discord){
         const Creditos = process.env.AUTHOR;

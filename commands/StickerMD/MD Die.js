@@ -1,6 +1,6 @@
 module.exports = {
     name: "mddie",
-    aliases: ["mdmuerta"],
+    aliases: ["mdmuerta", "mddead"],
     description:"Sticker Menhera Perrita Muerta",
     async execute (client, message, args, discord){
         const Creditos = process.env.AUTHOR;
@@ -20,7 +20,7 @@ module.exports = {
             let embed = new discord.EmbedBuilder()
                 .setColor('#D57DC1')
                 .setAuthor({ name: Author + ' | 𝐂𝐥𝐢𝐜𝐤 𝐩𝐚𝐫𝐚 𝐕𝐨𝐭𝐚𝐫', iconURL: Icon, url: Url })
-                .setDescription(" "+ message.author.username +" 𝐒𝐞 𝐌𝐮𝐫𝐢𝐨 𝐞𝐧 𝐂𝐨𝐦𝐛𝐚𝐭𝐞")
+                .setDescription(" "+ message.author.username +"  𝐌𝐮𝐫𝐢𝐨 𝐞𝐧 𝐂𝐨𝐦𝐛𝐚𝐭𝐞")
                 .setImage('https://cdn.discordapp.com/emojis/631036237041500210.png')
                 .setFooter({text: " 𝐂𝐫𝐞𝐝𝐢𝐭𝐨𝐬 : "+ Creditos +"  "+ Version +" "})
                 .setTimestamp()
