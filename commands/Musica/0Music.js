@@ -1,7 +1,7 @@
 module.exports = {
     name: " ==========> Music Commands <==========",
     aliases: ["==========> Music Commands <=========="],
-    description:"Reaction Anime Angry/Molesto",
+    description:"",
     
     async execute (client, message, args, discord){
         try {

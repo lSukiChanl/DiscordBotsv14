@@ -2,7 +2,7 @@
 module.exports = {
     name: " ==========> Menhera Dog Commands <==========",
     aliases: ["==========> Menhera Dog Commands <=========="],
-    description:"Reaction Anime Angry/Molesto",
+    description:"",
     
     async execute (client, message, args, discord){
         try {

@@ -1,7 +1,6 @@
-
 module.exports = {
-    name: " ==========> Reaction Commands <==========",
-    aliases: ["==========> Reaction Commands <=========="],
+    name: " ==========> Admin Commands <==========",
+    aliases: ["==========> Admin Commands <=========="],
     description:"",
     
     async execute (client, message, args, discord){

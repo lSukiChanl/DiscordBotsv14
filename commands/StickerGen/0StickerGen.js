@@ -2,7 +2,7 @@
 module.exports = {
     name: " ==========> Sticker Random Commands <==========",
     aliases: ["==========> Sticker Random Commands <=========="],
-    description:"Reaction Anime Angry/Molesto",
+    description:"",
     
     async execute (client, message, args, discord){
         try {
